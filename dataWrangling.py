@@ -153,7 +153,7 @@ def csvToArray(filename):
             data[i,21,a] = 1
             data[i,22,a] = 1
             data[i,23,a] = 1
-        b = int(df.values[i,1][-5:-3])+31
+        b = int(df.values[i,1].split('/')[1])+31
         data[i,0,b] = 1
         data[i,1,b] = 1
         data[i,2,b] = 1
@@ -203,7 +203,7 @@ def csvToArray(filename):
         data[i,21,c] = 1
         data[i,22,c] = 1
         data[i,23,c] = 1
-        d = int(df.values[i,1][-8:-6])+115
+        d = int(df.values[i,1].split('/')[0])+31
         data[i,0,d] = 1
         data[i,1,d] = 1
         data[i,2,d] = 1
@@ -228,7 +228,7 @@ def csvToArray(filename):
         data[i,21,d] = 1
         data[i,22,d] = 1
         data[i,23,d] = 1
-        if int(df.values[i,1][-8:-6]) in [1,2,3]:
+        if d-115 in [1,2,3]:
             data[i,0,128] = 1
             data[i,1,128] = 1
             data[i,2,128] = 1
@@ -253,7 +253,7 @@ def csvToArray(filename):
             data[i,21,128] = 1
             data[i,22,128] = 1
             data[i,23,128] = 1
-        elif int(df.values[i,1][-8:-6]) in [4,5,6]:
+        elif d-115 in [4,5,6]:
             data[i,0,129] = 1
             data[i,1,129] = 1
             data[i,2,129] = 1
@@ -278,7 +278,7 @@ def csvToArray(filename):
             data[i,21,129] = 1
             data[i,22,129] = 1
             data[i,23,129] = 1
-        elif int(df.values[i,1][-8:-6]) in [7,8,9]:
+        elif d-115 in [7,8,9]:
             data[i,0,130] = 1
             data[i,1,130] = 1
             data[i,2,130] = 1

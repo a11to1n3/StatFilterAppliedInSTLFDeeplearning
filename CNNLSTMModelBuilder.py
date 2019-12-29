@@ -27,7 +27,7 @@ def build(data_shape):
     cnn2 = layers.Conv1D(32, 3, activation='relu')(cnn1)
     cnn3 = layers.Conv1D(64, 3, activation='relu')(cnn2)
     cnn3 = layers.Flatten()(cnn3)
-    lstm = layers.LSTM(100, activation='relu')(inputs)
+    lstm = layers.LSTM(100,return_sequence = True, activation='relu')(inputs)
     x = layers.concatenate([cnn3,lstm])
     x = layers.Dense(100, activation='sigmoid')(x)
     outputs = layers.Dense(24)(x)

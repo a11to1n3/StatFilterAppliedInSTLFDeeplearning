@@ -60,7 +60,7 @@ def build_wavenet_model(data_shape, num_filters, kernel_size,
             [1] Oord, Aaron van den, et al. "Wavenet: A generative model for
                 raw audio." arXiv preprint arXiv:1609.03499 (2016).
     """
-    l_input = Input(input_shape=(data_shape,133))
+    l_input = Input(shape=(data_shape,133))
     l_stack_conv1d = Conv1D(num_filters, kernel_size, padding="same")(l_input)
     l_skip_connections = []
     for i in range(num_residual_blocks):

@@ -42,7 +42,7 @@ def WaveNetResidualConv1D(num_filters, kernel_size, dilation_rate):
     return build_residual_block
 
 
-def build_wavenet_model(data_shape, num_filters, kernel_size,
+def build_wavenet_model(data_shape_1,data_shape_2 , num_filters, kernel_size,
                         num_residual_blocks):
     """ Returns an implementation of WaveNet, as described in Section 2
         of the paper [1].
@@ -60,7 +60,7 @@ def build_wavenet_model(data_shape, num_filters, kernel_size,
             [1] Oord, Aaron van den, et al. "Wavenet: A generative model for
                 raw audio." arXiv preprint arXiv:1609.03499 (2016).
     """
-    l_input = Input(shape=(data_shape,133))
+    l_input = Input(shape=(data_shape_1,data_shape_2))
     l_stack_conv1d = Conv1D(num_filters, kernel_size, padding="same")(l_input)
     l_skip_connections = []
     for i in range(num_residual_blocks):
@@ -73,7 +73,7 @@ def build_wavenet_model(data_shape, num_filters, kernel_size,
     l2_conv1d = Conv1D(1, 1)(l1_conv1d)
     l_flatten = Flatten()(l2_conv1d)
     l_output = Dense(256, activation="softmax")(l_flatten)
-    l_out = Dense(data_shape)(l_output)
+    l_out = Dense(data_shape_1)(l_output)
     model = Model(inputs=[l_input], outputs=[l_out])
     model.compile(
         loss="categorical_crossentropy", optimizer="adam",

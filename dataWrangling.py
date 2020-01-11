@@ -97,9 +97,11 @@ def csvToArray(filename):
     data[:,18,0] = df.values[:,20]
     data[:,19,0] = df.values[:,21]
     data[:,20,0] = df.values[:,22]
-    for i in range(len(df)):
-        data[i,21,0] = float(df.values[i,23])
-        data[i,22,0] = float(df.values[i,24])
+    data[:,21,0] = df.values[:,23]
+    data[:,22,0] = df.values[:,24]
+    #for i in range(len(df)):
+    #    data[i,21,0] = float(df.values[i,23])
+    #    data[i,22,0] = float(df.values[i,24])
     data[:,23,0] = df.values[:,25]
     #Set weekday & day indices
     for i in range(len(df)):

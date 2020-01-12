@@ -52,15 +52,24 @@ def filterWithConfidenceLevel(data_all,confidence_level):
     
     # calculate summary statistics
     data_mean, data_std = mean(data_all[:,:,0].reshape(-1)), std(data_all[:,:,0].reshape(-1))
+    data_min = min(data_all[:,:,0].reshape(-1))
+    data_max = max(data_all[:,:,0].reshape(-1))
     # identify outliers
     cut_off = data_std * sigma
     lower, upper = data_mean - cut_off, data_mean + cut_off
     
+    #for i in range(data_all.shape[0]):
+    #    for j in range(data_all.shape[1]):
+    #        if data_all[i,j,0] < lower:
+    #            data_all[i,j,0]= lower
+    #        elif data_all[i,j,0] > upper:
+    #            data_all[i,j,0] = upper
+                
     for i in range(data_all.shape[0]):
         for j in range(data_all.shape[1]):
-            if data_all[i,j,0] < lower:
-                data_all[i,j,0]= lower
-            elif data_all[i,j,0] > upper:
-                data_all[i,j,0] = upper
+            if data_all[i,j,0] < data_mean:
+                data_all[i,j,0]= ((data_mean - data_all[i,j,0]) * (data_mean - lower)) / (data_mean - data_min())
+            elif data_all[i,j,0] > data_mean:
+                data_all[i,j,0] = ((data_all[i,j,0] - data_mean) * (upper - data_mean)) / (data_max() - data_mean)
                 
     return data_all

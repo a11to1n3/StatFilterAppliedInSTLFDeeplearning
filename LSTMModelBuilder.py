@@ -11,7 +11,7 @@ import tensorflow as tf
 
 
 
-def build(data_shape):
+def build(data_shape_1, data_shape_2):
     """
     This functions builds the desired LSTM model
     
@@ -24,7 +24,7 @@ def build(data_shape):
     # create NN model    
     # design network
     model = keras.models.Sequential()
-    model.add(keras.layers.LSTM(20, return_sequences=True, input_shape=(data_shape,133)))
+    model.add(keras.layers.LSTM(20, return_sequences=True, input_shape=(data_shape_1,data_shape_2)))
     model.add(keras.layers.LSTM(20, activation='selu'))
     model.add(keras.layers.Dropout(0.5))
     model.add(keras.layers.Dense(data_shape))

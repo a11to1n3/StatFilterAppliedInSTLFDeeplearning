@@ -9,7 +9,7 @@ Created on Thu Nov 28 10:27:53 2019
 from tensorflow import keras
 from tensorflow.keras import layers
 
-def build(data_shape):
+def build(data_shape_1, data_shape_2):
     """
     This functions builds the desired LSTM model
     
@@ -22,7 +22,7 @@ def build(data_shape):
     # create NN model    
     # design network
     
-    inputs = keras.Input(shape=(data_shape,133), name='inp')
+    inputs = keras.Input(shape=(data_shape_1, data_shape_2,133), name='inp')
     cnn1 = layers.Conv1D(16, 5, activation='relu')(inputs)
     cnn2 = layers.Conv1D(32, 3, activation='relu')(cnn1)
     cnn3 = layers.Conv1D(64, 3, activation='relu')(cnn2)

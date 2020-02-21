@@ -20,10 +20,10 @@ def csvToArray(filename):
 
     """
     # %% Load data
-    df = pd.read_csv('DayMarked.csv')
+    df = pd.read_csv(filename)
     
     # %% Create array
-    data = np.zeros((2975,24,133))
+    data = np.zeros((len(df),24,133))
     #data = np.zeros((3299,24,133))
     #Set holiday variable
     data[:,0,-1] = df.values[:,-2]

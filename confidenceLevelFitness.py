@@ -40,6 +40,6 @@ def calculateMAPE(data, original_data, EPOCHS=100, BATCH_SIZE=2):
     AVG = []
     for i in range(len(test_inp)):
         test_pred = model.predict(test_inp[i].reshape(-1,data.shape[1],133))
-        AVG.append(abs((np.e**(test_pred.T.reshape(-1)*10)-np.e**(test_pred.T.reshape(-1)*10))*100/np.e**(test_pred.T.reshape(-1)*10)))
+        AVG.append(abs((np.e**(test_pred.T.reshape(-1)*10)-np.e**(test_out.T.reshape(-1)*10))*100/np.e**(test_pred.T.reshape(-1)*10)))
     AVG = np.array(AVG)
     return np.mean(AVG)

@@ -156,7 +156,7 @@ def diffandScaleISONE(data_all):
     #print(diff.isna().sum())
     #print(np.argwhere(np.isinf(diff)))
     #print(np.argwhere(np.isinf(diff.dropna().drop(22405).drop(22429).drop(22404))))
-    diff_drop = np.array(diff[1:])
+    diff_drop = np.array(diff)
     
     # Plot PDF (histogram)
     

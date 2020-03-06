@@ -131,3 +131,49 @@ def plotPCAandSplit(data_all):
     plt.show()
     
     return mon2, sun2, rests2, mon_orig, sun_orig, rests_orig, presun_orig, premon_orig
+
+def diffandScaleISONE(data_all):
+    
+    """Summary or Description of the Function
+    this function scale the data by taking log of the original data 
+    and differencing the two consecutive values. 
+    
+    Parameters:
+    data_all (array): total array with 133 elements 
+
+    Returns:
+    diff_main (array): scaled data of all the days from 01.01.2014 to 23.12.2018
+    data_all (array): origin data of all the days from 01.01.2014 to 23.12.2018
+    """
+    
+    
+    # Differencing
+        
+    df_data_all = pd.Series(data_all[:,:,0].flatten())
+    ts_log = np.log(df_data_all)
+    #print(ts_log.isna().sum())
+    diff = ts_log - ts_log.shift(24)
+    #print(diff.isna().sum())
+    #print(np.argwhere(np.isinf(diff)))
+    #print(np.argwhere(np.isinf(diff.dropna().drop(22405).drop(22429).drop(22404))))
+    diff_drop = np.array(diff[1:])
+    
+    # Plot PDF (histogram)
+    
+    # Cut from 01.01.2014
+    diff_main = np.zeros((data_all.shape[0] - 1,24,133),dtype=np.float64)
+    diff_main[:,:,0:1] = diff_drop.reshape(-1,24,1)
+    diff_main[:,:,1:] = data_all[1:,:,1:]
+    np.savez('diff_whole.npz',diff_main)
+    plt.hist(diff_drop,bins='sqrt',histtype = 'step',color='r')
+    plt.title("PDF of the Difference Series")
+    plt.xlabel('Amplitude')
+    plt.ylabel('Density')
+    plt.show()
+    plt.plot(diff_drop)
+    plt.show()
+    plt.boxplot(diff_drop)
+    plt.show()
+
+    
+    return diff_main, data_all

@@ -150,20 +150,20 @@ def diffandScaleISONE(data_all):
     # Differencing
         
     df_data_all = pd.Series(data_all[:,:,0].flatten())
-    ts_log = np.log(df_data_all)/10
+    ts_log = np.log(df_data_all)
     #print(ts_log.isna().sum())
-    #diff = ts_log - ts_log.shift(24)
+    diff = ts_log - ts_log.shift(24)
     #print(diff.isna().sum())
     #print(np.argwhere(np.isinf(diff)))
     #print(np.argwhere(np.isinf(diff.dropna().drop(22405).drop(22429).drop(22404))))
-    diff_drop = np.array(ts_log)
+    diff_drop = np.array(diff[24:])
     
     # Plot PDF (histogram)
     
     # Cut from 01.01.2014
-    diff_main = np.zeros((data_all.shape[0],24,133),dtype=np.float64)
+    diff_main = np.zeros((data_all.shape[0]-1,24,133),dtype=np.float64)
     diff_main[:,:,0:1] = diff_drop.reshape(-1,24,1)
-    diff_main[:,:,1:] = data_all[:,:,1:]
+    diff_main[:,:,1:] = data_all[1:,:,1:]
     np.savez('diff_whole.npz',diff_main)
     plt.hist(diff_drop,bins='sqrt',histtype = 'step',color='r')
     plt.title("PDF of the Difference Series")

@@ -8,7 +8,7 @@ Created on Sat Mar 14 10:16:17 2020
 
 import pywt
 
-def waveletFunc(signal, wavelet="db2", level=1):
+def waveletFunc(signal, wavelet="db2", level=2):
     coeff = pywt.wavedec(signal, wavelet, level)
     cA1, cD1 = coeff
     cD11 = np.zeros_like(cD1)

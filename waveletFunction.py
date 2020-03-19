@@ -10,7 +10,7 @@ import pywt
 import numpy as np
 
 def waveletFunc(signal, wavelet="db2", level=1):
-    coeff = pywt.wavedec(signal, wavelet, level)
+    coeff = pywt.wavedec(signal, wavelet, level=1)
     cA1, cD1 = coeff
     cD11 = np.zeros_like(cD1)
     cA11 = np.zeros_like(cA1)    

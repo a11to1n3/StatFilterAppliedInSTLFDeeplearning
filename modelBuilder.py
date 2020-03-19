@@ -8,8 +8,8 @@ Created on Thu Nov 28 10:27:53 2019
 
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
-from tf.keras.layers import Flatten, Dense, Activation, Dropout
-from tf.keras.models import Sequential
+from tensorflow.keras.layers import Flatten, Dense, Activation, Dropout
+from tensorflow.keras.models import Sequential
 import numpy as np
 
 def build(data_shape):

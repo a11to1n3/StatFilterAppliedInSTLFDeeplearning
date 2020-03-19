@@ -7,6 +7,7 @@ Created on Sat Mar 14 10:16:17 2020
 """
 
 import pywt
+import numpy as np
 
 def waveletFunc(signal, wavelet="db2", level=1):
     coeff = pywt.wavedec(signal, wavelet, level)

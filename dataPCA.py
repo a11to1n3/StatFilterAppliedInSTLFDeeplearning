@@ -155,6 +155,7 @@ def diffandScaleISONE(data_all):
     diff = df_data_all - df_data_all.shift(24)
     data_scaler = MinMaxScaler()
     diff_drop = data_scaler.fit_transform(np.array(diff)[:24].reshape(-1,1)).reshape(-1)
+    print(diff_drop)
     
     #print(diff.isna().sum())
     #print(np.argwhere(np.isinf(diff)))

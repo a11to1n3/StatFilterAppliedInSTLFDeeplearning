@@ -13,7 +13,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
-
+from sklearn.preprocessing import MinMaxScaler
 
 def plotPCAandSplit(data_all):
     
@@ -150,9 +150,12 @@ def diffandScaleISONE(data_all):
     # Differencing
         
     df_data_all = pd.Series(data_all[:,:,0].flatten())
-    ts_log = np.log(df_data_all)
+    #ts_log = np.log(df_data_all)
     #print(ts_log.isna().sum())
-    diff = ts_log - ts_log.shift(24)
+    diff = df_data_all - df_data_all.shift(24)
+    data_scaler = MinMaxScaler()
+    diff = data_scaler.fit_transform(diff)
+    
     #print(diff.isna().sum())
     #print(np.argwhere(np.isinf(diff)))
     #print(np.argwhere(np.isinf(diff.dropna().drop(22405).drop(22429).drop(22404))))
@@ -176,4 +179,4 @@ def diffandScaleISONE(data_all):
     plt.show()
 
     
-    return diff_main, data_all
+    return diff_main, data_all, data_scaler

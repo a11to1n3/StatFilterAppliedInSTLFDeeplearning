@@ -154,12 +154,11 @@ def diffandScaleISONE(data_all):
     #print(ts_log.isna().sum())
     diff = df_data_all - df_data_all.shift(24)
     data_scaler = MinMaxScaler()
-    diff = data_scaler.fit_transform(diff[:24])
+    diff_drop = data_scaler.fit_transform(diff[:24].reshape(-1,1)).reshape(-1)
     
     #print(diff.isna().sum())
     #print(np.argwhere(np.isinf(diff)))
     #print(np.argwhere(np.isinf(diff.dropna().drop(22405).drop(22429).drop(22404))))
-    diff_drop = np.array(diff[24:])
     
     # Plot PDF (histogram)
     
